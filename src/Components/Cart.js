@@ -12,7 +12,7 @@ export const Cart = () => {
   const cartData = useSelector((state) => state.menuReducer.cart)
   const cashValue = useSelector((state) => state.menuReducer.cashPay)
   const [modalIsOpen, setModalIsOpen] = useState(false)
-  console.log(cartData)
+  // console.log(cartData)
   const [itemChange, setItemChange] = useState(false)
 // debugger
  const totalAmount = cartData?.map(item => {
