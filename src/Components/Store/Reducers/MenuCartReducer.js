@@ -17,7 +17,7 @@ const MenuCartReducer = (state = initialState, action) => {
       // state.products.items.filter(
       //   (item) => item.id !== action.payload.id
       // )
-      // debugger
+      // debugger 
       const item = action.payload
       item.quantity++
       found.push(item)
@@ -87,6 +87,7 @@ const MenuCartReducer = (state = initialState, action) => {
       // debugger
       const itemFound =  state.cart.find(item => item.id === action.payload.id)
       if(itemFound){
+        alert("Item already in Cart")
         return {
           ...state
         }

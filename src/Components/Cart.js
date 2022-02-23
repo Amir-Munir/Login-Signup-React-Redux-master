@@ -12,6 +12,7 @@ export const Cart = () => {
   const cartData = useSelector((state) => state.menuReducer.cart)
   const cashValue = useSelector((state) => state.menuReducer.cashPay)
   const [modalIsOpen, setModalIsOpen] = useState(false)
+  const [inputVal, setInputVal] = useState()
   // console.log(cartData)
   const [itemChange, setItemChange] = useState(false)
 // debugger
@@ -38,16 +39,24 @@ export const Cart = () => {
   }
 
   const cash = (e) => {
-    const cashValue = e.target.value
-    dispatch(cashPay(cashValue))
-    console.log(cashValue)
+    const {value, max} = e.target
+    const cash = parseInt(value)
+    // const minimum = Number(min)
+    const maximum = parseInt(max)
+    // debugger
+    if(value < maximum +  1){
+
+      setInputVal(cash)
+      dispatch(cashPay(cash))
+      console.log(cash)
+    }
   }
 
   const checkOutPay = () => {
     if (cashValue == totalAmount) return alert("Cash payed")
     return alert("Please Pay Total Price")
   }
-
+  
   return (
     <>
     <li onClick={() => {modalButton()}} className='header__item cart_li'>Cart</li>
@@ -114,11 +123,15 @@ export const Cart = () => {
             </div>
 
           <input
-            className="reactModal__input"
+            className="reactModal__input edit-items"
             onChange={cash}
             style={{ width: "300px" }}
-            type="text"
+            value={inputVal}
+            type="number"
             placeholder="Pay Cash in $"
+            max={totalAmount}
+            min={0}
+            
           />
           <button
             onClick={checkOutPay}
