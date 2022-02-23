@@ -8,6 +8,7 @@ import { CarouselSlider } from './Components/Slider';
 import { ButtonApi } from './Components/ButtonApi';
 import { Menu } from './Components/Menu';
 import { Cart } from './Components/Cart';
+import { Shazam } from './Components/Shazam';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route  path="/button" element={<ButtonApi />} />
           <Route  path="/menu" element={<Menu />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/shazam" element={<Shazam />} />
         </Routes>
     </>
   );

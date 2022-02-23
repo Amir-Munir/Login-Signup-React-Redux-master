@@ -20,6 +20,7 @@ export const NavBar = () => {
                         <li className='header__item'><Link to='/api'>API</Link></li>
                         <li className='header__item'><Link to='/slider'>Slider</Link></li>
                         <li className='header__item'><Link to='/button'>Button</Link></li>
+                        <li className='header__item'><Link to='/shazam'>Shazam</Link></li>
                         <li className='header__item'><Link to='/menu'>Menu</Link></li>
                         <Cart />
                     </ul>

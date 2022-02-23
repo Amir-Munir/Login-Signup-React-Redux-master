@@ -132,3 +132,29 @@ export const cashPay = (value) => {
         payload: value
     }
 }
+
+
+
+///////////////////////////////////////////////////// Shazam Actions //////////////////////////////////
+
+
+export const loadShazam = (params) => dispatch => {
+    var options = {
+      method: 'GET',
+      url: 'https://shazam.p.rapidapi.com/search',params,
+      headers: {
+        'x-rapidapi-host': 'shazam.p.rapidapi.com',
+        'x-rapidapi-key': '6a230a336cmsh8590d7ba60fbbfep1ef06bjsn0e12cbfdb625'
+      }
+    };
+    axios.get('https://shazam.p.rapidapi.com/search',options)
+    .then(res => {
+        dispatch({
+            type: 'LOAD-SHAZAM',
+            payload: {data: res.data}
+        })
+    })
+} 
+
+
+
