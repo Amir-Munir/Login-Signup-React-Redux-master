@@ -1,3 +1,4 @@
+import { type } from '@testing-library/user-event/dist/type';
 import axios from 'axios';
 
 ////////////////////////////////////////// todo actions /////////////////////////////////
@@ -139,6 +140,7 @@ export const cashPay = (value) => {
 
 
 export const loadShazam = (params) => dispatch => {
+    // debuggers
     var options = {
       method: 'GET',
       url: 'https://shazam.p.rapidapi.com/search',params,
@@ -158,3 +160,23 @@ export const loadShazam = (params) => dispatch => {
 
 
 
+export const inputValue = (value) => {
+    return{
+        type: "INPUT-VALUE",
+        payload: value
+    }
+}
+
+export const langDropDownValue = (value) => {
+    return{
+        type: "LANG-DROPDOWN-VALUE",
+        payload: value
+    }
+}
+
+export const resultDropDownValue = (value) => {
+    return{
+        type: "RESULT-DROPDOWN-VALUE",
+        payload: value
+    }
+}
