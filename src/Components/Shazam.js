@@ -64,15 +64,13 @@ export const Shazam = () => {
                     </div>
                 </form>
             </div>
-            <div className="song-details" style={{display : "block"}}>
-                {songDetails.map((el,index) => (
-                    <>
+            {songDetails.map((el,index) => (
+            <div key={index} className="song-details" style={{display : "block"}}>
                         <img src={el.track.images.coverart} style={{display : "block"}}/>
                         <h4>{el.track.title}</h4>
                         <h4>{el.track.subtitle}</h4>
-                    </>
-                    ))}
                 </div>
+                ))}
         </div>
     )
 }

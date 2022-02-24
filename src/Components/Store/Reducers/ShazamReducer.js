@@ -5,7 +5,6 @@ const initialState = {
 const ShazamReducer = (state = initialState, action) => {
     switch( action.type) {
         case 'LOAD-SHAZAM':
-            debugger
             return {
                 ...state,
                 loadShazam: action.payload
