@@ -17,7 +17,7 @@ const MenuCartReducer = (state = initialState, action) => {
       // state.products.items.filter(
       //   (item) => item.id !== action.payload.id
       // )
-      // debugger 
+    // debugger
       const item = action.payload
       item.quantity++
       found.push(item)

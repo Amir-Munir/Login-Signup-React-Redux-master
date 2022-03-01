@@ -3,12 +3,14 @@ import FormReducer from './FormReducer';
 import todoReducer from './TodoReducer';
 import MenuCartReducer from './MenuCartReducer';
 import ShazamReducer from './ShazamReducer';
+import TableReducer from './TableReducer'
 
 export default combineReducers({
     regForm :FormReducer,
     todo : todoReducer,
     menuReducer: MenuCartReducer,
-    shazam: ShazamReducer
+    shazam: ShazamReducer,
+    tableReducer: TableReducer
 
 });
 

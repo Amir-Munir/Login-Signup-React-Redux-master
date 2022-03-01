@@ -69,8 +69,8 @@ export const Shazam = () => {
                         <img src={el.track.images.coverart} style={{display : "block"}}/>
                         <h4>{el.track.title}</h4>
                         <h4>{el.track.subtitle}</h4>
-                </div>
-                ))}
+            </div>
+            ))}
         </div>
     )
 }

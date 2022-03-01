@@ -9,6 +9,7 @@ import { ButtonApi } from './Components/ButtonApi';
 import { Menu } from './Components/Menu';
 import { Cart } from './Components/Cart';
 import { Shazam } from './Components/Shazam';
+import { ReactBootstrapTable } from './Components/ReactBootstrapTable';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route  path="/menu" element={<Menu />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/shazam" element={<Shazam />} />
+          <Route path="/table" element={<ReactBootstrapTable />} />
         </Routes>
     </>
   );
