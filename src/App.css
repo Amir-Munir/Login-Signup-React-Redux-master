@@ -544,3 +544,8 @@ button {
     width: 100%;
   }
 }
+
+.bootstra-Modal{
+  width: 700px !important;
+  margin-left: 350px;
+}

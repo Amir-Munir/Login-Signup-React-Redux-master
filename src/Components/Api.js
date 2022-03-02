@@ -104,7 +104,7 @@ export const Api = () => {
                             </td>
                         </tr>
                     ))}
-                        <div className='modal_div'>
+                        <div >
                             <Modal  isOpen={modalIsOpen}
                                 style={
                                     {
