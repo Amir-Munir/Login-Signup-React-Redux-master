@@ -1,0 +1,39 @@
+# Types
+types/graphql-api.d.ts
+
+# System junk
+.DS_Store
+
+# Dotfiles
+.gitignore
+.env*
+.eslintignore
+.prettierignore
+.npmrc
+.nvmrc
+globalConfig.json
+
+# Build artifacts
+node_modules
+package-lock.json
+yarn.lock
+.next
+coverage
+build
+tmp
+dist
+*.log
+.cache
+.apt
+.heroku
+embed/public/embed.*
+.root-cause
+
+# Images/files
+*.ico
+*.png
+*.gif
+*.jpg
+*.jpeg
+*.svg
+*.pdf

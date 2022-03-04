@@ -545,7 +545,16 @@ button {
   }
 }
 
+
+
+/* //////////////////////////////////////////////////////////// React bootstrap table next ///////////////////////// */
+
+
 .bootstra-Modal{
   width: 700px !important;
   margin-left: 350px;
+}
+.modal-footer-btn{
+  float: left !important;
+  width: 100px;
 }

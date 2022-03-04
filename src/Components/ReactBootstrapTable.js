@@ -6,7 +6,7 @@ import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import BootstrapTable from 'react-bootstrap-table-next';
 import { useSelector } from 'react-redux';
 import paginationFactory from 'react-bootstrap-table2-paginator';
-import cellEditFactory,{Type} from 'react-bootstrap-table2-editor';
+// import cellEditFactory,{Type} from 'react-bootstrap-table2-editor';
 import filterFactory, {textFilter} from 'react-bootstrap-table2-filter';
 import { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
@@ -14,49 +14,50 @@ import { Modal, Button } from 'react-bootstrap';
 
 export const ReactBootstrapTable= () => {
     const userData = useSelector(state => state.tableReducer.Users )
-    const [showModal, setShowModal] = useState(false);
     const [modelInfo, setModalInfo] = useState([]);
     const [show, setShow] = useState(false)
     const handleClose = () => setShow(false)
-    const handleShow = () => setShow(true)
+    
   
     const rowEvents = {
-        onClick: (e, row) => {
-            console.log(row)
+        onClick: (e, row, column) => {
+            debugger
             setModalInfo(row)
             toggleTrueFalse()
         }
     }
 
     const toggleTrueFalse = () => {
-        setShowModal(handleShow)
+        setShow(true)
     }
 
     const ModelContent = () => {
         return(
-            <Modal className='bootstra-Modal' show={show} onClick={handleClose}>
-                <Modal.Header closeButton>
+            <Modal className='bootstra-Modal' show={show} >
+                <Modal.Header >
                     <Modal.Title>
-                        {modelInfo.name}
+                        <strong>{modelInfo.name}</strong>
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <ul>
                         <ol>
-                            {modelInfo.Id}
+                            <strong>ID : </strong>{modelInfo.Id}
                         </ol>
                         <ol>
-                            {modelInfo.name}
+                            <strong>Name : </strong>{modelInfo.name}
                         </ol>
                         <ol>
-                            {modelInfo.email}
+                           <strong>Email : </strong>{modelInfo.email}
                         </ol>
                         <ol>
-                            {modelInfo.company}
+                            <strong>Company : </strong>{modelInfo.company}
                         </ol>
                     </ul>
                 </Modal.Body>
                 <Modal.Footer>
+                    <Button variant='btn btn-info' className='modal-footer-btn' >Previous</Button>
+                    <Button variant='btn btn-info' className='modal-footer-btn' >Next</Button>
                     <Button variant='secondary' onClick={handleClose}>Close</Button>
                 </Modal.Footer>
 
@@ -64,6 +65,9 @@ export const ReactBootstrapTable= () => {
         )
     }
 
+    const onTableChange = (sort, newState) => {
+        console.log(newState)
+    }
     const columns = [
       {
         dataField: 'Id',
@@ -109,16 +113,17 @@ return(
             keyField='Id'
             data={ userData }
             columns={ columns }
-            striped
+            // striped
             hover
             pagination={ paginationFactory() }
-            cellEdit={ cellEditFactory
-                ({
-                    mode:"dbclick",
-                    blurToSave: true
-                }) }
+            // cellEdit={ cellEditFactory
+            //     ({
+            //         mode:"dbclick",
+            //         blurToSave: true
+            //     }) }
             filter={filterFactory()}
             rowEvents={rowEvents}
+            onTableChange={onTableChange()}
         />
         {show ? <ModelContent /> : null}
     </div>
