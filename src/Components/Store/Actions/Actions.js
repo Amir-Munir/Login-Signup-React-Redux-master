@@ -180,3 +180,14 @@ export const resultDropDownValue = (value) => {
         payload: value
     }
 }
+
+
+////////////////////////////////////// ReactBootstrap table 2 ////////////////////////////////////////////
+
+
+export const sortData = (arr) => {
+    return{
+        type: "SORT",
+        payload: arr
+    }
+}

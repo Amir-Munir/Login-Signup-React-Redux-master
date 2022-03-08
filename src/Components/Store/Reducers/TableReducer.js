@@ -5,6 +5,13 @@ const initialState = {
 }
 export const TableReducer  = (state = initialState, action) => {
     switch (action.type) {
+
+        case 'SORT':
+            return{
+                ...state,
+                Users: action.payload
+            }
+
         default : 
         return state
     }

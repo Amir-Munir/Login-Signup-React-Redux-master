@@ -558,3 +558,6 @@ button {
   float: left !important;
   width: 100px;
 }
+.two_buttons button{
+  margin: 10px;
+}

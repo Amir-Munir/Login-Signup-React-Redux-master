@@ -10,6 +10,8 @@ import paginationFactory from 'react-bootstrap-table2-paginator';
 import filterFactory, {textFilter} from 'react-bootstrap-table2-filter';
 import { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { sortData } from './Store/Actions/Actions';
 
 
 export const ReactBootstrapTable= () => {
@@ -17,11 +19,13 @@ export const ReactBootstrapTable= () => {
     const [modelInfo, setModalInfo] = useState([]);
     const [show, setShow] = useState(false)
     const handleClose = () => setShow(false)
+    const dispatch = useDispatch()
+    const assert = require("assert");
     
   
     const rowEvents = {
-        onClick: (e, row, column) => {
-            debugger
+        onClick: (e, row) => {
+            // debugger
             setModalInfo(row)
             toggleTrueFalse()
         }
@@ -29,6 +33,44 @@ export const ReactBootstrapTable= () => {
 
     const toggleTrueFalse = () => {
         setShow(true)
+    }
+
+    const onTableChange = (type, newState) => {
+        const newArr = newState.data.reverse()
+        debugger
+        dispatch(sortData(newArr))
+        // console.log(newState)
+        // console.log(type)
+    }
+
+    const maxId = userData.reduce(
+        (max, obj) => (obj.id > max ? obj.id : max),
+        userData[0].id
+    );
+    assert(maxId)
+    
+
+    const nextUser = () => {
+        // debugger
+        let indexOfUser = userData.findIndex((el) => el.Id === modelInfo.Id )
+        indexOfUser += 1;
+        const findLength = userData.reduce((a) => a + Object.length, 0)
+        if(findLength > indexOfUser) {
+        setModalInfo(userData[indexOfUser])
+        }
+    }
+
+    const previousUser = () => {
+        // debugger
+        let indexOfUser = userData.findIndex((el) => el.Id === modelInfo.Id )
+        indexOfUser -= 1;
+        const findLength = userData.reduce((a) => a + Object.length, 0)
+        if(indexOfUser >= 0) {
+        setModalInfo(userData[indexOfUser])
+        }
+        else if(indexOfUser === -1){
+            setModalInfo(userData[0])
+        }
     }
 
     const ModelContent = () => {
@@ -55,19 +97,20 @@ export const ReactBootstrapTable= () => {
                         </ol>
                     </ul>
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button variant='btn btn-info' className='modal-footer-btn' >Previous</Button>
-                    <Button variant='btn btn-info' className='modal-footer-btn' >Next</Button>
+                <Modal.Footer className='justify-content-between'>
+                    <div className='two_buttons'>
+                    <Button variant='btn btn-info' onClick={previousUser} className='modal-footer-btn' >Previous</Button>
+                    <Button variant='btn btn-info' onClick={nextUser} className='modal-footer-btn' >Next</Button></div>
+                    <div>
                     <Button variant='secondary' onClick={handleClose}>Close</Button>
+                    </div>
                 </Modal.Footer>
 
             </Modal>
         )
     }
 
-    const onTableChange = (sort, newState) => {
-        console.log(newState)
-    }
+
     const columns = [
       {
         dataField: 'Id',
@@ -113,6 +156,12 @@ return(
             keyField='Id'
             data={ userData }
             columns={ columns }
+            remote={ {
+                filter: true,
+                pagination: true,
+                sort: true,
+                cellEdit: false
+              } }
             // striped
             hover
             pagination={ paginationFactory() }
@@ -123,7 +172,7 @@ return(
             //     }) }
             filter={filterFactory()}
             rowEvents={rowEvents}
-            onTableChange={onTableChange()}
+            onTableChange={onTableChange}
         />
         {show ? <ModelContent /> : null}
     </div>
