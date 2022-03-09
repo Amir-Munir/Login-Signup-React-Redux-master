@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 // import ToolkitProvider from 'react-bootstrap-table2-toolkit'; 
 // import ToolkitProvider,{Search} from 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min';
@@ -24,7 +24,12 @@ export const ReactBootstrapTable= () => {
     const handleClose = () => setShow(false)
     const dispatch = useDispatch()
     
-    
+    useEffect(() => {
+        const maxId = Math.max(...userData.map(o => o.Id));
+        dispatch(MaxId(maxId))
+        const minId = Math.min(...userData.map(o => o.Id));
+        dispatch(MinId(minId))
+    }, []);
     const rowEvents = {
         onClick: (e, row) => {
             // debugger
@@ -48,8 +53,6 @@ export const ReactBootstrapTable= () => {
 
     const nextUser = () => {
         // debugger
-        const maxId = Math.max(...userData.map(o => o.Id));
-        dispatch(MaxId(maxId))
         let indexOfUser = userData.findIndex((el) => el.Id === modalInfo.Id )
         indexOfUser += 1;
         const findLength = userData.reduce((a) => a + Object.length, 0)
@@ -60,8 +63,6 @@ export const ReactBootstrapTable= () => {
 
     const previousUser = () => {
         // debugger
-        const minId = Math.min(...userData.map(o => o.Id));
-        dispatch(MinId(minId))
         let indexOfUser = userData.findIndex((el) => el.Id === modalInfo.Id )
         indexOfUser -= 1;
         const findLength = userData.reduce((a) => a + Object.length, 0)
@@ -96,7 +97,8 @@ export const ReactBootstrapTable= () => {
                 </Modal.Body>
                 <Modal.Footer className='justify-content-between'>
                     <div className='two_buttons'>
-                    {minimumId === modalInfo.Id && sortType === 'asc' ? '' : maximumId === modalInfo.Id && sortType === 'desc' ? '': <Button variant='btn btn-info' onClick={previousUser} className='modal-footer-btn' >Previous</Button> }
+                    {console.log('sort type',sortType,minimumId,modalInfo.Id)}
+                    {(minimumId === modalInfo.Id) && sortType === 'asc' ? '' : maximumId === modalInfo.Id && sortType === 'desc' ? '': <Button variant='btn btn-info' onClick={previousUser} className='modal-footer-btn' >Previous</Button> }
                     {maximumId === modalInfo.Id && sortType === 'asc' ? '' : minimumId === modalInfo.Id && sortType === 'desc'  ? '' : <Button variant='btn btn-info' onClick={nextUser} className='modal-footer-btn' >Next</Button>}
                     </div>
                     <div>
