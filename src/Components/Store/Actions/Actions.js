@@ -191,3 +191,24 @@ export const sortData = (arr) => {
         payload: arr
     }
 }
+
+export const MaxId = (id) => {
+    return{
+        type: "MAX",
+        payload: id
+    }
+}
+
+export const MinId = (id) => {
+    return{
+        type: "MIN",
+        payload: id
+    }
+}
+
+export const sortOrder = (sort) => {
+    return{
+        type: "SORT-ORDER",
+        payload: sort
+    }
+}

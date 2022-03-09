@@ -1,7 +1,8 @@
 import { Users } from '../../Users';
 
 const initialState = {
-    Users
+    Users,
+    sort: 'asc'
 }
 export const TableReducer  = (state = initialState, action) => {
     switch (action.type) {
@@ -10,6 +11,24 @@ export const TableReducer  = (state = initialState, action) => {
             return{
                 ...state,
                 Users: action.payload
+            }
+
+        case 'MAX':
+            return{
+                ...state,
+                max: action.payload
+            }
+
+        case 'MIN':
+            return{
+                ...state,
+                min: action.payload
+            }
+
+        case 'SORT-ORDER':
+            return{
+                ...state,
+                sort: action.payload
             }
 
         default : 

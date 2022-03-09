@@ -11,18 +11,20 @@ import filterFactory, {textFilter} from 'react-bootstrap-table2-filter';
 import { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { sortData } from './Store/Actions/Actions';
+import { MaxId, MinId, sortData, sortOrder } from './Store/Actions/Actions';
 
 
 export const ReactBootstrapTable= () => {
     const userData = useSelector(state => state.tableReducer.Users )
-    const [modelInfo, setModalInfo] = useState([]);
+    const maximumId = useSelector(state => state.tableReducer.max)
+    const minimumId = useSelector(state => state.tableReducer.min)
+    const sortType = useSelector(state => state.tableReducer.sort)
+    const [modalInfo, setModalInfo] = useState([]);
     const [show, setShow] = useState(false)
     const handleClose = () => setShow(false)
     const dispatch = useDispatch()
-    const assert = require("assert");
     
-  
+    
     const rowEvents = {
         onClick: (e, row) => {
             // debugger
@@ -37,39 +39,34 @@ export const ReactBootstrapTable= () => {
 
     const onTableChange = (type, newState) => {
         const newArr = newState.data.reverse()
-        debugger
+        // debugger
         dispatch(sortData(newArr))
-        // console.log(newState)
+        dispatch(sortOrder(newState.sortOrder))
+        // console.log(newState.sortOrder)
         // console.log(type)
     }
 
-    const maxId = userData.reduce(
-        (max, obj) => (obj.id > max ? obj.id : max),
-        userData[0].id
-    );
-    assert(maxId)
-    
-
     const nextUser = () => {
         // debugger
-        let indexOfUser = userData.findIndex((el) => el.Id === modelInfo.Id )
+        const maxId = Math.max(...userData.map(o => o.Id));
+        dispatch(MaxId(maxId))
+        let indexOfUser = userData.findIndex((el) => el.Id === modalInfo.Id )
         indexOfUser += 1;
         const findLength = userData.reduce((a) => a + Object.length, 0)
         if(findLength > indexOfUser) {
-        setModalInfo(userData[indexOfUser])
+            setModalInfo(userData[indexOfUser])
         }
     }
 
     const previousUser = () => {
         // debugger
-        let indexOfUser = userData.findIndex((el) => el.Id === modelInfo.Id )
+        const minId = Math.min(...userData.map(o => o.Id));
+        dispatch(MinId(minId))
+        let indexOfUser = userData.findIndex((el) => el.Id === modalInfo.Id )
         indexOfUser -= 1;
         const findLength = userData.reduce((a) => a + Object.length, 0)
         if(indexOfUser >= 0) {
-        setModalInfo(userData[indexOfUser])
-        }
-        else if(indexOfUser === -1){
-            setModalInfo(userData[0])
+            setModalInfo(userData[indexOfUser])
         }
     }
 
@@ -78,38 +75,37 @@ export const ReactBootstrapTable= () => {
             <Modal className='bootstra-Modal' show={show} >
                 <Modal.Header >
                     <Modal.Title>
-                        <strong>{modelInfo.name}</strong>
+                        <strong>{modalInfo.name}</strong>
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <ul>
                         <ol>
-                            <strong>ID : </strong>{modelInfo.Id}
+                            <strong>ID : </strong>{modalInfo.Id}
                         </ol>
                         <ol>
-                            <strong>Name : </strong>{modelInfo.name}
+                            <strong>Name : </strong>{modalInfo.name}
                         </ol>
                         <ol>
-                           <strong>Email : </strong>{modelInfo.email}
+                           <strong>Email : </strong>{modalInfo.email}
                         </ol>
                         <ol>
-                            <strong>Company : </strong>{modelInfo.company}
+                            <strong>Company : </strong>{modalInfo.company}
                         </ol>
                     </ul>
                 </Modal.Body>
                 <Modal.Footer className='justify-content-between'>
                     <div className='two_buttons'>
-                    <Button variant='btn btn-info' onClick={previousUser} className='modal-footer-btn' >Previous</Button>
-                    <Button variant='btn btn-info' onClick={nextUser} className='modal-footer-btn' >Next</Button></div>
+                    {minimumId === modalInfo.Id && sortType === 'asc' ? '' : maximumId === modalInfo.Id && sortType === 'desc' ? '': <Button variant='btn btn-info' onClick={previousUser} className='modal-footer-btn' >Previous</Button> }
+                    {maximumId === modalInfo.Id && sortType === 'asc' ? '' : minimumId === modalInfo.Id && sortType === 'desc'  ? '' : <Button variant='btn btn-info' onClick={nextUser} className='modal-footer-btn' >Next</Button>}
+                    </div>
                     <div>
                     <Button variant='secondary' onClick={handleClose}>Close</Button>
                     </div>
                 </Modal.Footer>
-
             </Modal>
         )
     }
-
 
     const columns = [
       {
