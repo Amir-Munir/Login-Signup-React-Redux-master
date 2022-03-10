@@ -561,3 +561,7 @@ button {
 .two_buttons button{
   margin: 10px;
 }
+.quiz_main{
+  width: 600px;
+  margin: 0 auto;
+}

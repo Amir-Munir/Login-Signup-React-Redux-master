@@ -10,6 +10,7 @@ import { Menu } from './Components/Menu';
 import { Cart } from './Components/Cart';
 import { Shazam } from './Components/Shazam';
 import { ReactBootstrapTable } from './Components/ReactBootstrapTable';
+import { QuizSetting } from './Components/Quiz/QuizSetting';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route  path="/button" element={<ButtonApi />} />
           <Route  path="/menu" element={<Menu />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/quiz" element={<QuizSetting />} />
           <Route path="/shazam" element={<Shazam />} />
           <Route path="/table" element={<ReactBootstrapTable />} />
         </Routes>
