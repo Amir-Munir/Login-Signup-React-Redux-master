@@ -46,8 +46,9 @@ export const ReactBootstrapTable= () => {
         const newArr = newState.data.reverse()
         // debugger
         dispatch(sortData(newArr))
+        console.log(newArr)
         dispatch(sortOrder(newState.sortOrder))
-        // console.log(newState.sortOrder)
+        console.log(newState.sortOrder)
         // console.log(type)
     }
 
@@ -108,6 +109,11 @@ export const ReactBootstrapTable= () => {
             </Modal>
         )
     }
+    const selectRow = {
+        mode: 'checkbox',
+        clickToSelect: true,
+        selectColumnPosition: 'left',
+      };
 
     const columns = [
       {
@@ -154,6 +160,7 @@ return(
             keyField='Id'
             data={ userData }
             columns={ columns }
+            selectRow={ selectRow }
             remote={ {
                 filter: true,
                 pagination: true,

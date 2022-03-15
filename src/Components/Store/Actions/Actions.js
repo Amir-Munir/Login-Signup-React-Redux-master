@@ -1,4 +1,3 @@
-import { type } from '@testing-library/user-event/dist/type';
 import axios from 'axios';
 
 ////////////////////////////////////////// todo actions /////////////////////////////////
@@ -211,4 +210,19 @@ export const sortOrder = (sort) => {
         type: "SORT-ORDER",
         payload: sort
     }
+}
+
+
+////////////////////////////////////////////////////////////// Quiz Actions//////////////////////////////////////
+
+export const loadQuiz = (obj)=> dispatch => {
+    axios.get(
+        `https://opentdb.com/api.php?amount=${obj.amount}&category=${obj.categoryType}&difficulty=${obj.difficultyType}&type=${obj.mcqsType}`)
+    .then(res => {
+        // debugger
+        dispatch({
+            type: 'LOAD-QUIZ',
+            payload: { data: res.data.results }
+        })
+    })
 }
