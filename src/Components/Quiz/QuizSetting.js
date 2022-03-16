@@ -1,12 +1,14 @@
 import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { loadQuiz } from "../Store/Actions/Actions"
+import { getScore, loadQuiz } from "../Store/Actions/Actions"
 import ReactModal from "react-modal"
 
 export const QuizSetting = () => {
   const quizData = useSelector((state) =>
     state.quizData.loadQuiz.data ? state.quizData.loadQuiz.data : []
   )
+  const finalScore = useSelector( state => state.quizData.score ? state.quizData.score : 0)
+  debugger
   const [categoryType, setCategoryType] = useState()
   const [difficultyType, setDifficultyType] = useState()
   const [mcqsType, setMcqsType] = useState()
@@ -14,7 +16,6 @@ export const QuizSetting = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const dispatch = useDispatch()
 
-  console.log(quizData)
   const category = (e) => {
     const value = e.target.value
     console.log(value)
@@ -41,23 +42,20 @@ export const QuizSetting = () => {
     setModalIsOpen(true)
   }
 
-  //   const MCQSanswer = (e) => {
-  //     var result = [],
-  //     node = e.target.parentNode.parentNode.firstChild;
-  //     debugger
+  const submitValue = (e,elem) => {
+    debugger
+    const value = e.target.value
+    if(value === elem.correct_answer){
 
-  //     while ( node ) {
-  //       if ( node !== this && node.nodeType === Node.ELEMENT_NODE )
-  //       result.push( node );
-  //       node = node.nextElementSibling || node.nextSibling;
-  //     }
-  //    const filtered = result.filter(el=> el.firstElementChild !== e.target)
-  //    filtered.forEach(el=>el.firstElementChild.checked = false)
-
-  // }
-
+      dispatch(getScore)
+    }
+  }
+  const yourScore = () => {
+    alert(finalScore)
+  }
   return (
     <div>
+      <form>
       <div className="quiz_main mt-5">
         <h2 className="text-center">Quiz App</h2>
         <select
@@ -116,14 +114,21 @@ export const QuizSetting = () => {
           },
         }}
       >
+        <button
+          className="reactModal__button"
+          style={{ float: "right" }}
+          onClick={() => setModalIsOpen(false)}
+        >
+          Close
+        </button>
         {quizData.map((el, index) => {
           return (
             <div key={index}>
               <div>
                 {el.type === "multiple" ? (
-                  <Mcqs elem={el} ind={index}  />
+                  <Mcqs elem={el} ind={index} submit={submitValue}/>
                 ) : (
-                  <Boolean1 elem={el} ind={index} />
+                  <Boolean1 elem={el} ind={index}  submit={submitValue}/>
                 )}
               </div>
             </div>
@@ -136,31 +141,40 @@ export const QuizSetting = () => {
         >
           Close
         </button>
+        <button
+          className="reactModal__button"
+          onClick={yourScore}
+        >
+          Submit
+        </button>
       </ReactModal>
+      </form>
     </div>
   )
 }
 
-const Mcqs = ({ elem, ind }) => {
+export const Mcqs = ({ elem, ind, submit }) => {
   // debugger
   const answers = [elem.correct_answer, ...elem.incorrect_answers]
+
   return (
     <div key={ind}>
       <h3 className="quiz-h3">{elem.question}</h3>
       <br />
       {answers.map((el, index) => (
         <div className="form-check" key={index}>
-          <input
-            className="form-check-input"
-            type="radio"
-              
-            name={elem.question}
-            id={`${el}-1-${index}`}
-          />
           <label
             className="form-check-label quiz-lable"
             htmlFor={index+1}
           >
+          <input
+            className="form-check-input"
+            type="radio"
+            onChange={(e)=>submit(e, elem)}
+            name={elem.question}
+            id={`${el}-1-${index}`}
+            value={el}
+          />
             {el}
           </label>
         </div>
@@ -169,7 +183,8 @@ const Mcqs = ({ elem, ind }) => {
   )
 }
 
-export const Boolean1 = ({ elem, ind }) => {
+export const Boolean1 = ({ elem, ind, submit }) => {
+
   return (
     <div >
       <h3 className="quiz-h3">{elem.question}</h3>
@@ -177,24 +192,28 @@ export const Boolean1 = ({ elem, ind }) => {
         <input
           className="form-check-input"
           type="radio"
+          value="True"
+          onChange={(e)=>submit(e, elem)}
           name={`${elem.question}`}
           // question + ture/false + index 0, 1, 2...
           id={`${elem.question}-true-${ind}`}
-        />
-        <label className="form-check-label quiz-lable" htmlFor="flexRadioDefault5">
-          True
-        </label>
+        />True
+        {/* <label className="form-check-label quiz-lable" htmlFor="flexRadioDefault5"> */}
+          
+        {/* </label> */}
       </div>
       <div className="form-check">
         <input
           className="form-check-input"
           type="radio"
+          value="False"
+          onChange={(e)=>submit(e, elem)}
           name={`${elem.question}`}
           id={`${elem.question}-false-${ind}`}
-        />
-        <label className="form-check-label quiz-lable" htmlFor="flexRadioDefault6">
-          False
-        </label>
+        />False
+        {/* <label className="form-check-label quiz-lable" htmlFor="flexRadioDefault6"> */}
+          
+        {/* </label> */}
       </div>
     </div>
   )

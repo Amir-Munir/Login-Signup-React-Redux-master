@@ -219,10 +219,16 @@ export const loadQuiz = (obj)=> dispatch => {
     axios.get(
         `https://opentdb.com/api.php?amount=${obj.amount}&category=${obj.categoryType}&difficulty=${obj.difficultyType}&type=${obj.mcqsType}`)
     .then(res => {
-        // debugger
         dispatch({
             type: 'LOAD-QUIZ',
             payload: { data: res.data.results }
         })
     })
+}
+
+export const getScore = () => {
+    debugger
+    return{
+        type: "SCORE"
+    }
 }
