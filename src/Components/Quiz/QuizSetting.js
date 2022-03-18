@@ -13,6 +13,7 @@ export const QuizSetting = () => {
   const [difficultyType, setDifficultyType] = useState()
   const [mcqsType, setMcqsType] = useState()
   const [amount, setAmount] = useState()
+  const [arrayOfQuestions, setArrayOfQuestions] = useState([])
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const dispatch = useDispatch()
 
@@ -46,11 +47,14 @@ export const QuizSetting = () => {
   }
 
   const submitValue = (e,elem) => {
-    // e.preventDefault()
+    setArrayOfQuestions([...arrayOfQuestions,elem.question])
     // debugger
+    const found = arrayOfQuestions.filter(x => x === elem.question).length;
     const value = e.target.value
-    if(value === elem.correct_answer){
-      dispatch(getScore())
+    if(found < 1){
+      if(value === elem.correct_answer){
+        dispatch(getScore())
+      }
     }
   }
   const yourScore = () => {
