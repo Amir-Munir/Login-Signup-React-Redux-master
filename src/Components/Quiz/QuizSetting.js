@@ -1,6 +1,6 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { getScore, loadQuiz } from "../Store/Actions/Actions"
+import { getScore, loadQuiz, stateReset } from "../Store/Actions/Actions"
 import ReactModal from "react-modal"
 
 export const QuizSetting = () => {
@@ -8,7 +8,7 @@ export const QuizSetting = () => {
     state.quizData.loadQuiz.data ? state.quizData.loadQuiz.data : []
   )
   const finalScore = useSelector( state => state.quizData.score ? state.quizData.score : 0)
-  debugger
+  
   const [categoryType, setCategoryType] = useState()
   const [difficultyType, setDifficultyType] = useState()
   const [mcqsType, setMcqsType] = useState()
@@ -16,24 +16,27 @@ export const QuizSetting = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const dispatch = useDispatch()
 
+  const dispatcher = () =>{
+    dispatch(stateReset(0))
+  }
+  useEffect (() => {
+    dispatcher()
+  }, [modalIsOpen])
+
   const category = (e) => {
     const value = e.target.value
-    console.log(value)
     setCategoryType(value)
   }
   const difficulty = (e) => {
     const value = e.target.value
-    console.log(value)
     setDifficultyType(value)
   }
   const type = (e) => {
     const value = e.target.value
-    console.log(value)
     setMcqsType(value)
   }
   const amountOfQuestions = (e) => {
     const value = e.target.value
-    console.log(value)
     setAmount(value)
   }
 
@@ -43,16 +46,18 @@ export const QuizSetting = () => {
   }
 
   const submitValue = (e,elem) => {
-    debugger
+    // e.preventDefault()
+    // debugger
     const value = e.target.value
     if(value === elem.correct_answer){
-
-      dispatch(getScore)
+      dispatch(getScore())
     }
   }
   const yourScore = () => {
     alert(finalScore)
   }
+
+ 
   return (
     <div>
       <form>
@@ -154,14 +159,11 @@ export const QuizSetting = () => {
 }
 
 export const Mcqs = ({ elem, ind, submit }) => {
-  // debugger
-  const answers = [elem.correct_answer, ...elem.incorrect_answers]
-
   return (
     <div key={ind}>
       <h3 className="quiz-h3">{elem.question}</h3>
       <br />
-      {answers.map((el, index) => (
+      {elem.allAnswers.map((el, index) => (
         <div className="form-check" key={index}>
           <label
             className="form-check-label quiz-lable"
@@ -170,7 +172,7 @@ export const Mcqs = ({ elem, ind, submit }) => {
           <input
             className="form-check-input"
             type="radio"
-            onChange={(e)=>submit(e, elem)}
+            onClick={(e)=>submit(e, elem)}
             name={elem.question}
             id={`${el}-1-${index}`}
             value={el}
@@ -193,27 +195,21 @@ export const Boolean1 = ({ elem, ind, submit }) => {
           className="form-check-input"
           type="radio"
           value="True"
-          onChange={(e)=>submit(e, elem)}
+          onClick={(e)=>submit(e, elem)}
           name={`${elem.question}`}
           // question + ture/false + index 0, 1, 2...
           id={`${elem.question}-true-${ind}`}
         />True
-        {/* <label className="form-check-label quiz-lable" htmlFor="flexRadioDefault5"> */}
-          
-        {/* </label> */}
       </div>
       <div className="form-check">
         <input
           className="form-check-input"
           type="radio"
           value="False"
-          onChange={(e)=>submit(e, elem)}
+          onClick={(e)=>submit(e, elem)}
           name={`${elem.question}`}
           id={`${elem.question}-false-${ind}`}
         />False
-        {/* <label className="form-check-label quiz-lable" htmlFor="flexRadioDefault6"> */}
-          
-        {/* </label> */}
       </div>
     </div>
   )

@@ -12,7 +12,7 @@ export default combineReducers({
     menuReducer: MenuCartReducer,
     shazam: ShazamReducer,
     tableReducer: TableReducer,
-    quizData: QuizReducer
+    quizData: QuizReducer,
 
 });
 

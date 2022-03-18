@@ -219,16 +219,35 @@ export const loadQuiz = (obj)=> dispatch => {
     axios.get(
         `https://opentdb.com/api.php?amount=${obj.amount}&category=${obj.categoryType}&difficulty=${obj.difficultyType}&type=${obj.mcqsType}`)
     .then(res => {
+        const response = res.data.results
+        // debugger
+        response.map(elem => {
+            const answers = [elem.correct_answer, ...elem.incorrect_answers]
+            const shuffleArray = answers.sort(() => Math.random() - 0.5);
+            elem.allAnswers = shuffleArray
+            return elem
+        })
         dispatch({
             type: 'LOAD-QUIZ',
-            payload: { data: res.data.results }
+            payload: { data: response }
         })
     })
 }
 
-export const getScore = () => {
-    debugger
+export const getScore = (score) => {
+    // debugger
     return{
-        type: "SCORE"
+        type: "SCORE",
+        payload: 1
+
+    }
+}
+
+export const stateReset = (score) => {
+    // debugger
+    return{
+        type: "RESET-STATE",
+        payload: score
+
     }
 }

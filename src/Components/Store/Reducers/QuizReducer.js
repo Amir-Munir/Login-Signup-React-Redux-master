@@ -4,7 +4,7 @@ const initialState = {
 }
 
 const QuizReducer = (state = initialState ,action) => {
-    debugger
+    // debugger
     switch(action.type) {
         case "LOAD-QUIZ":
             return{
@@ -13,10 +13,15 @@ const QuizReducer = (state = initialState ,action) => {
             }
 
         case "SCORE":
-            debugger
             return{
                 ...state,
-                score: state.score + 1
+                score: state.score + action.payload
+            }
+
+        case "RESET-STATE":
+            return{
+                ...state,
+                score: action.payload
             }
 
         default:
