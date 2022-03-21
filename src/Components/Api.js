@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import {loadTODO, newUserAddTodo, view } from './Store/Actions/Actions';
 import { useDispatch, useSelector } from 'react-redux';
 import ReactModal from 'react-modal';
 import Modal from 'react-modal'
-import DeleteUser from './DeleteUser';
-import { addNewUser } from './Store/Actions/Actions';
 
-Modal.setAppElement('#root');
-ReactModal.setAppElement('#root')
+import {loadTODO, newUserAddTodo, view } from './Store/Actions/Actions';
+import { addNewUser } from './Store/Actions/Actions';
+import DeleteUser from './DeleteUser';
+
+// Modal.setAppElement('#root');
+// ReactModal.setAppElement('#root')
 
 export const Api = () => {
 
@@ -46,10 +47,8 @@ export const Api = () => {
     }
 
     return (
-        <div>
         <div className="app-container">
             <table className="center">
-                <div className='reactModal__div'>
                     <ReactModal isOpen={modalIsOpen1}
                         style={
                             {
@@ -70,7 +69,6 @@ export const Api = () => {
                         <button className='reactModal__button' onClick={onAdd}>Add</button>
                         <button className='reactModal__button' onClick={()=> setModalIsOpen1(false)}>Close</button>
                     </ReactModal>
-                </div>
                 <thead>
                     <tr>
                         <th>
@@ -92,42 +90,38 @@ export const Api = () => {
                 <tbody>
                     {todos?.map((t,index) => (
                         <tr key={index}>
-                            
                             <td>{t.id}</td>
                             <td>{t.title}</td>
                             <td><DeleteUser userId={t.id}/>
                                 <button 
-                                        type="button" className="btn btn-outline-dark float-right"
-                                        onClick={()=>viewUser(t)}>
-                                        View
+                                    type="button" className="btn btn-outline-dark float-right"
+                                    onClick={()=>viewUser(t)}>
+                                    View
                                 </button>
                             </td>
                         </tr>
                     ))}
-                        <div >
-                            <Modal  isOpen={modalIsOpen}
-                                style={
-                                    {
-                                        overlay:{
-                                            backgroundColor : "gray"
-                                        },
-                                        content: {
-                                            color: "#0a0a0a"
-                                        }
-                                    }
-                                }
-                            > 
-                                <h1 className='modal__h1' >{viewByID.id ? viewByID.id : ''}</h1>
-                                <h1 className='modal__h1'>{viewByID.title ? viewByID.title : ''}</h1>
-                                <p>{viewByID.body ? viewByID.body : ''}</p>
-                                <div>
-                                    <button className='reactModal__button' onClick={()=> setModalIsOpen(false)}>Close</button>
-                                </div>
-                            </Modal> 
-                        </div>
                 </tbody>
             </table>
+            <Modal  isOpen={modalIsOpen}
+                style={
+                    {
+                        overlay:{
+                            backgroundColor : "gray"
+                        },
+                        content: {
+                            color: "#0a0a0a"
+                        }
+                    }
+                }
+            > 
+                <h1 className='modal__h1' >{viewByID.id ? viewByID.id : ''}</h1>
+                <h1 className='modal__h1'>{viewByID.title ? viewByID.title : ''}</h1>
+                <p>{viewByID.body ? viewByID.body : ''}</p>
+                <div>
+                    <button className='reactModal__button' onClick={()=> setModalIsOpen(false)}>Close</button>
+                </div>
+            </Modal>    
         </div>
-    </div>
     )
 }

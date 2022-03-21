@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 // import { Link } from 'react-router-dom';
+
 import { emailValidation, email_Error, passwordValidation, password_Error, signUP } from './Store/Actions/Actions';
 
 
@@ -21,7 +22,6 @@ export const SignUp = () => {
     const onChange = (e) => {
         const name = e.target.name;
         const value = e.target.value;
-// debugger
 
         switch(name){
             case 'name':
@@ -30,7 +30,6 @@ export const SignUp = () => {
                 }
                 break;
             case 'email':
-                // debugger
                 if(regex.test(value) === true){
                     dispatch(emailValidation(true))
                     dispatch(signUP({ name, value }));

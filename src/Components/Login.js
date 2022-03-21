@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
+
 import { Login } from './Store/Actions/Actions';
 
 export const LogIn = () => {
@@ -19,11 +20,12 @@ export const LogIn = () => {
     const onSubmit = (e) => {
         e.preventDefault()
         const user = atob(localStorage.getItem("User"));
-        const userData = JSON.parse(JSON.stringify(user))
+        // debugger
+        const userData = JSON.parse(user)
         if(userData.name === getData.name
             && userData.email === getData.email
             && userData.password === getData.password)
-        {
+            {
             navigate("/api")
         }
         else{

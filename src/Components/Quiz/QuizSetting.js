@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { getScore, loadQuiz, stateReset } from "../Store/Actions/Actions"
 import ReactModal from "react-modal"
+
+import { getScore, loadQuiz, stateReset } from "../Store/Actions/Actions"
 
 export const QuizSetting = () => {
   const quizData = useSelector((state) =>

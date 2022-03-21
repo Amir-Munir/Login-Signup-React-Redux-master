@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
-import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
-import 'pure-react-carousel/dist/react-carousel.es.css';
 import { useSelector, useDispatch } from 'react-redux'
+import 'pure-react-carousel/dist/react-carousel.es.css';
+import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
+
 import { loadTODO } from './Store/Actions/Actions';
 import img from '../image/img.jpg';
 

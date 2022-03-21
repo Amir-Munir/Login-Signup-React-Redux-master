@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import ReactModal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadTODO } from './Store/Actions/Actions';
+import ReactModal from 'react-modal';
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
+
+import { loadTODO } from './Store/Actions/Actions';
 import img from '../image/img.jpg';
 
 ReactModal.setAppElement('#root')

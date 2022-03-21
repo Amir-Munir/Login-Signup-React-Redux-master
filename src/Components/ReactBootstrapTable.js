@@ -1,16 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState  } from 'react';
+import { useDispatch, useSelector  } from 'react-redux';
+import BootstrapTable from 'react-bootstrap-table-next';
+import paginationFactory from 'react-bootstrap-table2-paginator';
+import filterFactory, {textFilter} from 'react-bootstrap-table2-filter';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+import { Modal, Button } from 'react-bootstrap';
 // import ToolkitProvider from 'react-bootstrap-table2-toolkit'; 
 // import ToolkitProvider,{Search} from 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min';
 // import ToolkitProvider from 'react-bootstrap-table-next'
-import BootstrapTable from 'react-bootstrap-table-next';
-import { useSelector } from 'react-redux';
-import paginationFactory from 'react-bootstrap-table2-paginator';
 // import cellEditFactory,{Type} from 'react-bootstrap-table2-editor';
-import filterFactory, {textFilter} from 'react-bootstrap-table2-filter';
-import { useState } from 'react';
-import { Modal, Button } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+
 import { MaxId, MinId, sortData, sortOrder } from './Store/Actions/Actions';
 
 
