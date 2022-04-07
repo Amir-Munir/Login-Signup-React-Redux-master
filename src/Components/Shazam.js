@@ -5,7 +5,7 @@ import TypeOut from 'react-typeout';
 import { inputValue, langDropDownValue, loadShazam, resultDropDownValue } from "./Store/Actions/Actions";
 // import back from '../image/back.jpg' 
 
-const words = ['Identify songs playing around you!']
+const words = ['Shazam will name your song in seconds!','Identify songs playing around you!']
 export const Shazam = () => {
     const dispatch = useDispatch()
     const searchVal = useSelector(state => state.shazam.inputValue ? state.shazam.inputValue : '')
