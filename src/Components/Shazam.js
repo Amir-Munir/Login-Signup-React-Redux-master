@@ -1,16 +1,18 @@
 import React from "react";
 import { useDispatch, useSelector } from 'react-redux';
+import TypeOut from 'react-typeout';
 
 import { inputValue, langDropDownValue, loadShazam, resultDropDownValue } from "./Store/Actions/Actions";
 // import back from '../image/back.jpg' 
 
+const words = ['Identify songs playing around you!']
 export const Shazam = () => {
     const dispatch = useDispatch()
     const searchVal = useSelector(state => state.shazam.inputValue ? state.shazam.inputValue : '')
     const languageVal = useSelector(state => state.shazam.langDropdown ? state.shazam.langDropdown : '')
     const resultVal = useSelector(state => state.shazam.resultDropdown ? state.shazam.resultDropdown : '')
     // debugger
-    const songArtist = useSelector(state => state.shazam.loadShazam.data && state.shazam.loadShazam.data.artists.hits ? state.shazam.loadShazam.data.artists.hits : [])
+    // const songArtist = useSelector(state => state.shazam.loadShazam.data && state.shazam.loadShazam.data.artists.hits ? state.shazam.loadShazam.data.artists.hits : [])
     const songDetails = useSelector(state => state.shazam.loadShazam.data && state.shazam.loadShazam.data.tracks.hits ? state.shazam.loadShazam.data.tracks.hits : [])
 
     const searchBtn = () => {
@@ -35,8 +37,16 @@ export const Shazam = () => {
 
     return(
         <div className="back-img"> 
+        
             <div className="s132">
                 <form>
+                    <div>
+                        <p>
+                            <strong>
+                            <TypeOut style={{color:'black',display:'block'}} words={words} typeSpeed={100} />
+                            </strong>
+                        </p>
+                    </div>
                     <div className="inner-form">
                     <div className="input-field first-wrap d-flex align-items-center">
                         <div className="input-select mx-2">
@@ -67,7 +77,7 @@ export const Shazam = () => {
             </div>
             {songDetails.map((el,index) => (
             <div key={index} className="song-details" style={{display : "block"}}>
-                        <img src={el.track.images.coverart} style={{display : "block"}}/>
+                        <img alt="" src={el.track.images.coverart} style={{display : "block"}}/>
                         <h4>{el.track.title}</h4>
                         <h4>{el.track.subtitle}</h4>
             </div>

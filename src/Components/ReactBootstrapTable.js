@@ -45,9 +45,9 @@ export const ReactBootstrapTable= () => {
         const newArr = newState.data.reverse()
         // debugger
         dispatch(sortData(newArr))
-        console.log(newArr)
+        // console.log(newArr)
         dispatch(sortOrder(newState.sortOrder))
-        console.log(newState.sortOrder)
+        // console.log(newState.sortOrder)
         // console.log(type)
     }
 
@@ -97,7 +97,6 @@ export const ReactBootstrapTable= () => {
                 </Modal.Body>
                 <Modal.Footer className='justify-content-between'>
                     <div className='two_buttons'>
-                    {console.log('sort type',sortType,minimumId,modalInfo.Id)}
                     {(minimumId === modalInfo.Id) && sortType === 'asc' ? '' : maximumId === modalInfo.Id && sortType === 'desc' ? '': <Button variant='btn btn-info' onClick={previousUser} className='modal-footer-btn' >Previous</Button> }
                     {maximumId === modalInfo.Id && sortType === 'asc' ? '' : minimumId === modalInfo.Id && sortType === 'desc'  ? '' : <Button variant='btn btn-info' onClick={nextUser} className='modal-footer-btn' >Next</Button>}
                     </div>
@@ -164,7 +163,7 @@ return(
                 filter: true,
                 pagination: true,
                 sort: true,
-                cellEdit: false
+                cellEdit: true
               } }
             // striped
             hover

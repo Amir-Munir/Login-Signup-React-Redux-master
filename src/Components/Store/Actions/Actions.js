@@ -234,7 +234,7 @@ export const loadQuiz = (obj)=> dispatch => {
     })
 }
 
-export const getScore = (score) => {
+export const getScore = () => {
     // debugger
     return{
         type: "SCORE",

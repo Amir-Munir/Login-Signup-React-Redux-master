@@ -288,6 +288,10 @@ td{
 
 
 
+.text_effect_div{
+  margin-top: 20px;
+  margin-left: 200px;
+}
 input,
 button {
   font-family: 'Poppins', sans-serif;

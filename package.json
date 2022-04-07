@@ -21,8 +21,10 @@
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.1",
     "react-scripts": "^5.0.0",
+    "react-typeout": "^1.0.0",
     "redux-form": "^8.3.8",
     "redux-thunk": "^2.4.1",
+    "typewriter-effect": "^2.18.2",
     "web-vitals": "^2.1.0"
   },
   "scripts": {

@@ -48,7 +48,7 @@ export const ButtonApi = () => {
                             }
                         }
                     >       <button className='reactModal__button' style={{float: 'right'}} onClick={()=> setModalIsOpen(false)}>Close</button>
-                            <CarouselProvider className='slider center' 
+                            <CarouselProvider className='slider center'
                                 totalSlides={20}
                             >
                                 <Slider className='slider' style={{backgroundImage: `url(${img})`}} >
