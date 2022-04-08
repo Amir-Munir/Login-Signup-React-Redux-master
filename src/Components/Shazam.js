@@ -3,20 +3,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import TypeOut from 'react-typeout';
 
 import { inputValue, langDropDownValue, loadShazam, resultDropDownValue } from "./Store/Actions/Actions";
-// import back from '../image/back.jpg' 
 
-const words = ['Shazam will name your song in seconds!','Identify songs playing around you!']
 export const Shazam = () => {
     const dispatch = useDispatch()
     const searchVal = useSelector(state => state.shazam.inputValue ? state.shazam.inputValue : '')
     const languageVal = useSelector(state => state.shazam.langDropdown ? state.shazam.langDropdown : '')
     const resultVal = useSelector(state => state.shazam.resultDropdown ? state.shazam.resultDropdown : '')
-    // debugger
     // const songArtist = useSelector(state => state.shazam.loadShazam.data && state.shazam.loadShazam.data.artists.hits ? state.shazam.loadShazam.data.artists.hits : [])
     const songDetails = useSelector(state => state.shazam.loadShazam.data && state.shazam.loadShazam.data.tracks.hits ? state.shazam.loadShazam.data.tracks.hits : [])
+    
+    const words = ['Shazam will name your song in seconds!','Identify songs playing around you!']
+    const words2 = ['Shazam will name your song in seconds!','Identify songs playing around you!']
 
+    
     const searchBtn = () => {
-        // debugger
         dispatch(loadShazam({term: searchVal, locale: languageVal, offset: '0', limit: resultVal}))
     }
 
@@ -36,14 +36,13 @@ export const Shazam = () => {
     }
 
     return(
-        <div className="back-img"> 
-        
+        <div className="back-img">
             <div className="s132">
                 <form>
                     <div>
                         <p>
                             <strong>
-                            <TypeOut style={{color:'black',display:'block'}} words={words} typeSpeed={100} />
+                                <TypeOut style={{color:'black',fontSize:'200'}} words={words} typeSpeed={100} />
                             </strong>
                         </p>
                     </div>
