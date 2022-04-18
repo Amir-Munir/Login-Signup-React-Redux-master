@@ -11,6 +11,7 @@ import { Cart } from './Components/Cart';
 import { Shazam } from './Components/Shazam';
 import { ReactBootstrapTable } from './Components/ReactBootstrapTable';
 import { QuizSetting } from './Components/Quiz/QuizSetting';
+import { DivHideAndShow } from './Components/DivHideShow';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route  path="/menu" element={<Menu />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/quiz" element={<QuizSetting />} />
+          <Route path="/div" element={<DivHideAndShow />} />
           <Route path="/shazam" element={<Shazam />} />
           <Route path="/table" element={<ReactBootstrapTable />} />
         </Routes>

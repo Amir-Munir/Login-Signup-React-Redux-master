@@ -23,6 +23,7 @@ export const NavBar = () => {
                         <li className='header__item'><Link to='/button'>Button</Link></li>
                         <li className='header__item'><Link to='/shazam'>Shazam</Link></li>
                         <li className='header__item'><Link to='/quiz'>Quiz</Link></li>
+                        <li className='header__item'><Link to='/div'>Div</Link></li>
                         <li className='header__item'><Link to='/table'>Table</Link></li>
                         <li className='header__item'><Link to='/menu'>Menu</Link></li>
                         <Cart />

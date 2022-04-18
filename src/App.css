@@ -571,3 +571,12 @@ button {
 .quiz-h3{
   color: #000;
 }
+
+.tabs{
+  display: none;
+}
+
+.active-tab{
+  display: block;
+  border-style: dotted;
+}
